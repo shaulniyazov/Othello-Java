@@ -29,33 +29,17 @@ public class NewOthelloModel {
     boolean makeMove(int row, int col, CellState state){
         //todo this should call isMoveLegal, then if that's true, call flip
         System.out.println(grid[row][col].state.toString2());
-        boolean isLegal = false;
-        MyPoint[] arr = getEightDirections(row, col).toArray(new MyPoint[0]);
-        // this checks to see if its an unoccupied space
-        if(grid[row][col].state.equals(CellState.None)){
-
-            for (int i = 0; i < arr.length; i++) {
-                if(arr[i] == null)
-                    continue;
-                if(arr[i].state.equals(oppositeState(state))
-                        && isMoveFlippable(row, col, state,i)){
-                    isLegal = true;
-                    flipPieces(arr[i],endPoint,i);
-                }
-            }
+        if(isMoveLegal(row,col,state)){
+            flipPieces(arr[i],endPoint,i);
         }
-
-        return isLegal;
     }
 
     boolean isMoveLegal(int row, int col, CellState state){
         System.out.println(grid[row][col].state.toString2());
         boolean isLegal = false;
-        //todo the array declaration should be after the state check. if its not None, why get directions?
-        MyPoint[] arr = getEightDirections(row, col).toArray(new MyPoint[0]);
         // this checks to see if it's an unoccupied space
         if(grid[row][col].state.equals(CellState.None)){
-
+            MyPoint[] arr = getEightDirections(row, col).toArray(new MyPoint[0]);
             for (int i = 0; i < arr.length; i++) {
                 if(arr[i] == null)
                     continue;
